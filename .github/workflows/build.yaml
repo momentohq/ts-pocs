@@ -1,0 +1,29 @@
+name: Build
+
+on:
+  pull_request:
+    branches: [ main ]
+  push:
+    branches: [ main ]
+
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Setup repo
+        uses: actions/checkout@v2
+
+      - name: Shared Build Steps
+        uses: momentohq/standards-and-practices/github-actions/shared-build@gh-actions-v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16
+
+      - name: Build Packages
+        run: ./build-all-npm-packages.sh
