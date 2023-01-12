@@ -7,7 +7,7 @@
     "dist/src",
     "dist/package.json"
   ],
-  "types": "dist/src/index.d.ts",
+  "types": "dist/index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/momentohq/ts-pocs/aws-cache-helpers"
