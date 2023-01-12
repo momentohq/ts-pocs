@@ -44,6 +44,6 @@
     "@aws-sdk/types": "3.226.0",
     "@aws-sdk/util-dynamodb": "3.245.0",
     "@gomomento/sdk": "0.16.0",
-    "@types/aws-lambda": "^8.10.109"
+    "@types/aws-lambda": "8.10.109"
   }
 }
