@@ -1,0 +1,49 @@
+{
+  "name": "@gomomento-poc/aws-cache-helpers",
+  "version": "0.1.0",
+  "description": "Small proof of concept libraries to help you enable caching in AWS",
+  "main": "dist/index.js",
+  "files": [
+    "dist/src",
+    "dist/package.json"
+  ],
+  "types": "dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/momentohq/ts-pocs/aws-cache-helpers"
+  },
+  "scripts": {
+    "prebuild": "eslint . --ext .ts",
+    "test": "jest",
+    "lint": "eslint . --ext .ts",
+    "format": "eslint . --ext .ts --fix",
+    "watch": "tsc -w",
+    "build": "rm -rf dist && tsc"
+  },
+  "author": "",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@types/jest": "29.2.5",
+    "@typescript-eslint/eslint-plugin": "^5.48.1",
+    "@typescript-eslint/parser": "^5.48.1",
+    "eslint": "^8.31.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-import-resolver-typescript": "^3.5.3",
+    "eslint-plugin-import": "^2.27.4",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-promise": "^6.1.1",
+    "jest": "29.3.1",
+    "prettier": "^2.8.2",
+    "ts-jest": "29.0.4",
+    "typescript": "^4.9.4"
+  },
+  "dependencies": {
+    "@aws-sdk/lib-dynamodb": "3.245.0",
+    "@aws-sdk/types": "3.226.0",
+    "@aws-sdk/util-dynamodb": "3.245.0",
+    "@gomomento/sdk": "0.16.0",
+    "@types/aws-lambda": "8.10.109"
+  }
+}
