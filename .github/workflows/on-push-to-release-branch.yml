@@ -49,7 +49,9 @@ jobs:
         run: ./build-all-npm-packages.sh
 
       - name: Publish package to npm
-        run: ./publish-all-npm-packages.sh
+        run: |
+          export VERSION="${{ needs.release.outputs.version }}"
+          ./publish-all-npm-packages.sh
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
 
