@@ -3,7 +3,7 @@
 Various collection of JS utilities to help you enable caching with Momento in AWS. 
 
 ## Usage
-#### AWS JS SDK v3 Middleware
+### AWS JS SDK v3 Middleware
 ```javascript
 import {NewCachingMiddleware} from '@gomomento-poc/aws-cache-helpers';
 
@@ -18,7 +18,7 @@ db.middlewareStack.use(NewCachingMiddleware({
 ));
 ```
 
-#### AWS DynamoDB Stream Lambda Handler
+### AWS DynamoDB Stream Lambda Handler
 ```javascript
 import {NewStreamCacheHandler} from '@gomomento-poc/aws-cache-helpers';
 
