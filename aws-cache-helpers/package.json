@@ -1,5 +1,5 @@
 {
-  "name": "@gomomento/poc-aws-cache-helpers",
+  "name": "@gomomento-poc/aws-cache-helpers",
   "version": "0.1.0",
   "description": "Small proof of concept libraries to help you enable caching in AWS",
   "main": "dist/src/index.js",
