@@ -10,7 +10,7 @@ A place to store proof of concepts of typescript code we want users to be able t
 
 ## Packages
 
-### aws-cache-helpers -
+### [aws-cache-helpers](https://www.npmjs.com/package/@gomomento-poc/aws-cache-helpers)
 
 Various collection of JS utilities to help you enable caching with Momento in AWS. Please see [README](./aws-cache-helpers/README.md) for usage instructions.
 
