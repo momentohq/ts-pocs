@@ -9,7 +9,7 @@
   "types": "dist/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "https://github.com/momentohq/ts-pocs/aws-cache-helpers"
+    "url": "https://github.com/momentohq/ts-pocs/"
   },
   "scripts": {
     "prebuild": "eslint . --ext .ts",
