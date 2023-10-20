@@ -1,33 +1,29 @@
 import {DynamoDBStreamEvent} from 'aws-lambda';
 import {normalizeKeysFromAttributeValue} from '../internal/utils/dynamodb';
 import {
+  CacheClient,
   CacheDelete,
   CacheSet,
-  LogFormat,
-  LogLevel,
-  SimpleCacheClient,
-  getLogger,
+  DefaultMomentoLogger,
+  DefaultMomentoLoggerLevel,
 } from '@gomomento/sdk';
 
 export interface StreamHandlerOptions {
   tableName: string;
-  momentoAuthToken: string;
-  defaultCacheTtl: number;
   cacheName: string;
+  cacheClient: CacheClient;
 }
+
 export const NewStreamCacheHandler = ({
   tableName,
-  momentoAuthToken,
-  defaultCacheTtl,
   cacheName,
+  cacheClient,
 }: StreamHandlerOptions) => {
-  const momento = new SimpleCacheClient(momentoAuthToken, defaultCacheTtl, {
-    loggerOptions: {
-      level: LogLevel.INFO,
-      format: LogFormat.JSON,
-    },
-  });
-  const logger = getLogger('StreamCacheHandler');
+  const momento = cacheClient;
+  const logger = new DefaultMomentoLogger(
+    'StreamCacheHandler',
+    DefaultMomentoLoggerLevel.WARN
+  );
 
   return async (event: DynamoDBStreamEvent): Promise<any> => {
     for (const r of event.Records) {
@@ -40,8 +36,7 @@ export const NewStreamCacheHandler = ({
             const setRsp = await momento.set(
               cacheName,
               recordKey,
-              JSON.stringify(r.dynamodb.NewImage),
-              defaultCacheTtl
+              JSON.stringify(r.dynamodb.NewImage)
             );
             if (setRsp instanceof CacheSet.Error) {
               logger.error(
