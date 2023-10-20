@@ -39,10 +39,11 @@
     "typescript": "^4.9.4"
   },
   "dependencies": {
-    "@aws-sdk/lib-dynamodb": "3.245.0",
-    "@aws-sdk/types": "3.226.0",
-    "@aws-sdk/util-dynamodb": "3.245.0",
-    "@gomomento/sdk": "0.16.0",
-    "@types/aws-lambda": "8.10.109"
+    "@aws-sdk/lib-dynamodb": "3.431.0",
+    "@aws-sdk/types": "3.428.0",
+    "@aws-sdk/util-dynamodb": "3.431.0",
+    "@gomomento/sdk": "1.43.0",
+    "@types/aws-lambda": "8.10.125",
+    "aws-lambda": "1.0.7"
   }
 }

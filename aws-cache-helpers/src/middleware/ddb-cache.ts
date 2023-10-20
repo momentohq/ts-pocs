@@ -1,10 +1,9 @@
 import {
+  CacheClient,
   CacheGet,
   CacheSet,
-  getLogger,
-  LogFormat,
-  LogLevel,
-  SimpleCacheClient,
+  DefaultMomentoLogger,
+  DefaultMomentoLoggerLevel,
 } from '@gomomento/sdk';
 import {normalizeKeysFromRequestValue} from '../internal/utils/dynamodb';
 import {
@@ -20,9 +19,8 @@ const CommandCacheAllowList = ['GetItemCommand'];
 
 export interface CacheMiddleWareOptions {
   tableName: string;
-  momentoAuthToken: string;
-  defaultCacheTtl: number;
   cacheName: string;
+  momentoClient: CacheClient;
 }
 
 export const NewCachingMiddleware = (
@@ -32,20 +30,16 @@ export const NewCachingMiddleware = (
     clientStack.add(cachingMiddleware(options), {tags: ['CACHE']});
   },
 });
+
 export function cachingMiddleware(
   options: CacheMiddleWareOptions
 ): InitializeMiddleware<any, any> {
-  const momento = new SimpleCacheClient(
-    options.momentoAuthToken,
-    options.defaultCacheTtl,
-    {
-      loggerOptions: {
-        level: LogLevel.INFO,
-        format: LogFormat.JSON,
-      },
-    }
+  const momento = options.momentoClient;
+
+  const logger = new DefaultMomentoLogger(
+    'momentoCachingMiddleware',
+    DefaultMomentoLoggerLevel.WARN
   );
-  const logger = getLogger('momentoCachingMiddleware');
 
   return <Output extends MetadataBearer>(
       next: InitializeHandler<any, Output>

@@ -10,14 +10,17 @@ Various collection of JS utilities to help you enable caching with Momento in AW
 
 ```javascript
 import {NewCachingMiddleware} from '@gomomento-poc/aws-cache-helpers';
+import {CacheClient, Configurations} from '@gomomento/sdk'
 
-const authToken = 'REPLACE_ME';
 const db = DynamoDBDocumentClient.from(new DynamoDBClient({}));
 db.middlewareStack.use(NewCachingMiddleware({
     tableName: 'my-ddb-table',
-    momentoAuthToken: authToken,
-    defaultCacheTtl: 86400,
-    cacheName: 'default'
+    cacheName: 'default',
+    momentoClient: new CacheClient({
+        configuration: Configurations.InRegion.Default.latest(),
+        defaultTtlSeconds: 3600,
+        credentialProvider: CredentialProvider.fromEnvironmentVariable("MOMENTO_API_KEY")
+    }),
   }
 ));
 ```
@@ -26,11 +29,13 @@ db.middlewareStack.use(NewCachingMiddleware({
 ```javascript
 import {NewStreamCacheHandler} from '@gomomento-poc/aws-cache-helpers';
 
-const authToken = 'REPLACE_ME';
 export const handler = NewStreamCacheHandler({
   tableName: 'my-ddb-table',
-  momentoAuthToken: authToken,
-  defaultCacheTtl: 86400,
-  cacheName: 'default' 
+  cacheName: 'default',
+  cacheClient: new CacheClient({
+      configuration: Configurations.InRegion.Default.latest(),
+      defaultTtlSeconds: 3600,
+      credentialProvider: CredentialProvider.fromEnvironmentVariable("MOMENTO_API_KEY")
+  })
 });
 ```
