@@ -11,10 +11,17 @@ jobs:
     steps:
       - uses: actions/checkout@main
 
+      - name: Generate release bot token
+        id: app-token
+        uses: actions/create-github-app-token@v3
+        with:
+          app-id: ${{ secrets.MOMENTO_RELEASE_APP_ID }}
+          private-key: ${{ secrets.MOMENTO_RELEASE_APP_PRIVATE_KEY }}
+
       - name: Merge main -> release
         uses: devmasx/merge-branch@master
         with:
           type: now
           from_branch: main
           target_branch: release
-          github_token: ${{ secrets.MOMENTO_MACHINE_USER_GITHUB_TOKEN }}
+          github_token: ${{ steps.app-token.outputs.token }}
